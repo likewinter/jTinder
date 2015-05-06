@@ -16,7 +16,8 @@
 			animationSpeed: 400,
 			threshold: 1,
 			likeSelector: '.like',
-			dislikeSelector: '.dislike'
+			dislikeSelector: '.dislike',
+			refreshOnNext: false
 		};
 
 	var container = null;
@@ -57,7 +58,18 @@
 			current_pane = index;
 		},
 
+		refreshPanes: function() {
+			panes = $('li', container);
+			if (panes.length > pane_count) {
+				pane_count = panes.length;
+				++current_pane;
+			}
+		},
+
 		next: function () {
+			if (this.settings.refreshOnNext) {
+				this.refreshPanes();
+			}
 			return this.showPane(current_pane - 1);
 		},
 
