@@ -68,6 +68,10 @@ dislikeSelector (Optional) - Default value: .dislike - CSS selector of a like im
 
 refreshOnNext (Optional) - Default value: false - Refresh container with panes on Like or Dislike (Do DOM manipulation before call to jTinder like or dislike methods, i.e. use jTinder like or dislike as cb on DOM manipulation)
 
+cleanUp (Optional) - Default value: true - Cleanup hidden (swiped) panes (LI element) from DOM; number of items needed to reach cleanup can be set within cleanUpItems option.
+
+cleanUpOptions (Optional) - Default value: 10 - See above
+
 
 jTinder Methods
 -------------------------

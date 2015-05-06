@@ -17,7 +17,9 @@
 			threshold: 1,
 			likeSelector: '.like',
 			dislikeSelector: '.dislike',
-			refreshOnNext: false
+			refreshOnNext: false,
+			cleanUp: true,
+			cleanUpItems: 10
 		};
 
 	var container = null;
@@ -60,16 +62,27 @@
 
 		refreshPanes: function() {
 			panes = $('li', container);
-			if (panes.length > pane_count) {
+			if (panes.length !== pane_count) {
 				pane_count = panes.length;
 				++current_pane;
 			}
 		},
 
+		cleanUp: function() {
+			var hiddenPanes = $('li:hidden', container);
+			if (hiddenPanes.length > this.settings.cleanUpItems) {
+				hiddenPanes.remove();
+			}
+		},
+
 		next: function () {
+			if (this.settings.cleanUp) {
+				this.cleanUp();
+			}
 			if (this.settings.refreshOnNext) {
 				this.refreshPanes();
 			}
+
 			return this.showPane(current_pane - 1);
 		},
 
